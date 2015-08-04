@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <title>Linving together</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="page-header">
+                <h1><a href="/">🠜</a> One app, two template engines.</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <h2>App.js</h2>
+                <pre class="prettyprint lang-js">
+var consolidate = require('consolidate');
+var express = require('express');
+
+var app = express();
+
+app.engine('hbs', consolidate.handlebars);
+app.engine('html', consolidate.nunjucks);
+app.engine('nunjucks', consolidate.nunjucks);
+
+app.set('view engine', 'html');
+app.set('views', __dirname + '/views');</pre>
+        </div>
+    </div>
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <title>Using {{ template }}</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="page-header">
+                <h1>
+                  <a href="/">🠜</a>
+                  You are using {{ template }}
+                </h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <h2>Controller</h2>
+                <pre class="prettyprint lang-js">
+var cohabitation = function(req, res, templateEngine) {
+    var templateInfo = utils.templateSelection(templateEngine);
+    res.render('cohabitation/cohab' + templateInfo.extension,
+        _.extend(templateInfo, {
+            isHBS: templateInfo.template == 'hbs',
+            isNunjucks: templateInfo.template == 'nunjucks'
+        })
+    );
+};              </pre>
+                <h2>Template</h2>
+                <pre class="prettyprint lang-html">
+&lt;div class="col-md-offset-2 col-md-8"&gt;
+  &lt;p&gt;Is it an explicit choice:
+      &lt;strong&gt;&#123;&#123; chosen &#125;&#125;&lt;/strong&gt;
+  &lt;/p&gt;
+  &lt;p&gt;
+      &#123;&#123;#if isHBS &#125;&#125;
+        &lt;a href="/cohabitation/nunjucks"&gt;Change&lt;/a&gt;
+      &#123;&#123;/if&#125;&#125;
+      &#123;&#123;#if isNunjucks &#125;&#125;
+        &lt;a href="/cohabitation/hbs"&gt;Change&lt;/a&gt;
+      &#123;&#123;/if &#125;&#125;
+  &lt;/p&gt;
+&lt;/div&gt;     </pre>
+            </div>
+
+            <div class="col-md-4">
+              <h2>⚙</h2>
+                <p>Is it an explicit choice:
+                    <strong>{{ chosen }}</strong>
+                </p>
+                <p>
+                    {{#if isHBS }}
+                      <a class="btn btn-default" href="/cohabitation/nunjucks">Change</a>
+                    {{/if}}
+                    {{#if isNunjucks }}
+                      <a class="btn btn-default" href="/cohabitation/hbs">Change</a>
+                    {{/if }}
+                </p>
+          </div>
+        </div>
+    </div>
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+</body>
+
+</html>

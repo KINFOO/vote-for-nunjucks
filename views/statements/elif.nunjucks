@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <title>elif</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="page-header">
+                <h1>
+                  <a href="/">🠜</a>
+                  You are using {{ template|default('Nunjucks')|title }}
+                </h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <h2>Controller</h2>
+                <pre class="prettyprint lang-js">
+var statement_elif = function(req, res, templateEngine) {
+
+    // Choose type
+    var types = ['AVEP', 'AVMS_AL', 'AVMS_AP', 'ALEC', 'AVC',
+        'INTEGRATION', 'INTERNAL', 'OTHER', 'UFOTA'];
+    var type = types[_.random(0, types.length - 1)];
+
+    // Display
+    var templateInfo = utils.templateSelection(templateEngine);
+    res.render('statements/elif' + templateInfo.extension, _.extend(templateInfo, {
+        type: type
+    }));
+};              </pre>
+                <h2>Template</h2>
+                <pre class="prettyprint lang-html">{% raw %}
+&lt;div class="col-md-4"&gt;
+  &lt;h2&gt;⚙&lt;/h2&gt;
+    &lt;p&gt;
+      Call partial for:
+      {% if   type == 'AVEP' %}        {{ type }}
+      {% elif type == 'AVMS_AL' %}     {{ type }}
+      {% elif type == 'AVMS_AP' %}     {{ type }}
+      {% elif type == 'ALEC' %}        {{ type }}
+      {% elif type == 'AVC' %}         {{ type }}
+      {% elif type == 'INTEGRATION' %} {{ type }}
+      {% elif type == 'INTERNAL' %}    {{ type }}
+      {% elif type == 'OTHER' %}       {{ type }}
+      {% elif type == 'UFOTA' %}       {{ type }}
+      {% endif %}
+    &lt;/p&gt;
+&lt;/div&gt;{% endraw %}</pre>
+            </div>
+            <div class="col-md-4">
+              <h2>⚙</h2>
+                <p>
+                  Call partial for:
+                  {% if   type == 'AVEP' %}        {{ type }}
+                  {% elif type == 'AVMS_AL' %}     {{ type }}
+                  {% elif type == 'AVMS_AP' %}     {{ type }}
+                  {% elif type == 'ALEC' %}        {{ type }}
+                  {% elif type == 'AVC' %}         {{ type }}
+                  {% elif type == 'INTEGRATION' %} {{ type }}
+                  {% elif type == 'INTERNAL' %}    {{ type }}
+                  {% elif type == 'OTHER' %}       {{ type }}
+                  {% elif type == 'UFOTA' %}       {{ type }}
+                  {% endif %}
+                </p>
+                <p>
+                  {% if template == 'hbs' %}
+                    <a class="btn btn-default" href="/statements/elif/nunjucks">Change</a>
+                  {%else %}
+                    <a class="btn btn-default" href="/statements/elif/hbs">Change</a>
+                  {% endif %}
+                </p>
+          </div>
+        </div>
+    </div>
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+</body>
+
+</html>
